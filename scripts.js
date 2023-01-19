@@ -1,9 +1,4 @@
-/* getComputerChoice()
-pick random number 0-2
-if 0, rock
-if 1, paper
-if 2, scissors */
-
+// return random selection from rock, paper, scissors
 function getComputerChoice() {
     let randInt = Math.floor(Math.random() * 3);
 
@@ -19,4 +14,55 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice());
+// return the winner of a round
+function getWinner(playerSelection, computerSelection) {
+    const optionsArray = ['rock','paper','scissors'];
+    let  playerIndex = optionsArray.indexOf(playerSelection.toLowerCase());
+    let computerIndex = optionsArray.indexOf(computerSelection.toLowerCase());
+
+    if ((playerIndex + 1) % 3 === computerIndex) {
+        return 'computer';
+    } else if (playerIndex === computerIndex) {
+        return 'draw';
+    } else {
+        return 'player';
+    }
+}
+
+// play a round, and return a message specific to the outcome
+function playRound(playerSelection, computerSelection) {
+    let winner = getWinner(playerSelection, computerSelection);
+    
+    switch (winner) {
+        case 'computer':
+            return `You lose! ${computerSelection} beats ${playerSelection}.`;
+        case 'draw':
+            return "It's a draw!";
+        case 'player':
+            return `You win! ${playerSelection} beats ${computerSelection}.`
+        default:
+            return 'error';
+    }
+}
+
+
+function game() {
+    let playerPoints = 0;
+    let computerPoints = 0;
+
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt('Rock, Paper, Scissors? ');
+        computerSelection = getComputerChoice();
+
+        roundOutcome = playRound(playerSelection, computerSelection);
+
+        winner = getWinner();
+        if (winner === 'player') {
+            playerPoints++;
+        } else if (winner === 'computer') {
+            computerPoints++;
+        }
+    }
+}
+
+game();
