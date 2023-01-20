@@ -14,6 +14,24 @@ function getComputerChoice() {
     }
 }
 
+function getPlayerChoice() {
+    let playerChoice;
+
+    while (true){
+        playerChoice = prompt('Rock, Paper, Scissors?');
+        lowerPlayerChoice = playerChoice.toLowerCase();
+
+        if (lowerPlayerChoice === 'rock' || lowerPlayerChoice === 'paper' || lowerPlayerChoice === 'scissors') {
+            return lowerPlayerChoice;
+        }
+
+        alert("That's not an option!");
+    }
+
+
+
+}
+
 // return the winner of a round
 function getWinner(playerSelection, computerSelection) {
     const optionsArray = ['rock','paper','scissors'];
@@ -51,18 +69,23 @@ function game() {
     let computerPoints = 0;
 
     for (let i = 0; i < 5; i++) {
-        playerSelection = prompt('Rock, Paper, Scissors? ');
+        playerSelection = getPlayerChoice();
         computerSelection = getComputerChoice();
 
         roundOutcome = playRound(playerSelection, computerSelection);
 
-        winner = getWinner();
+        winner = getWinner(playerSelection, computerSelection);
         if (winner === 'player') {
             playerPoints++;
         } else if (winner === 'computer') {
             computerPoints++;
         }
+
+        console.log(roundOutcome);
     }
+
+
+
 }
 
 game();
