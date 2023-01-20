@@ -63,6 +63,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// Return a message, declaring the overall winner of the game, or if its a draw
 function getGameWinnerMessage(playerPoints, computerPoints) {
     if (playerPoints > computerPoints){
         return `Player: ${playerPoints}\nComputer: ${computerPoints}\nYou Win!`;
@@ -74,6 +75,7 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
 
 }
 
+// Play a five round match of rock paper scissors
 function game() {
     let playerPoints = 0;
     let computerPoints = 0;
@@ -94,9 +96,6 @@ function game() {
         console.log(roundOutcome);
     }
     console.log(getGameWinnerMessage(playerPoints, computerPoints));
-
-
-
 }
 
 game();
