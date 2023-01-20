@@ -33,7 +33,7 @@ function getPlayerChoice() {
 }
 
 // return the winner of a round
-function getWinner(playerSelection, computerSelection) {
+function GetRoundWinner(playerSelection, computerSelection) {
     const optionsArray = ['rock','paper','scissors'];
     let  playerIndex = optionsArray.indexOf(playerSelection.toLowerCase());
     let computerIndex = optionsArray.indexOf(computerSelection.toLowerCase());
@@ -49,7 +49,7 @@ function getWinner(playerSelection, computerSelection) {
 
 // play a round, and return a message specific to the outcome
 function playRound(playerSelection, computerSelection) {
-    let winner = getWinner(playerSelection, computerSelection);
+    let winner = GetRoundWinner(playerSelection, computerSelection);
     
     switch (winner) {
         case 'computer':
@@ -63,6 +63,16 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function getGameWinnerMessage(playerPoints, computerPoints) {
+    if (playerPoints > computerPoints){
+        return `Player: ${playerPoints}\nComputer: ${computerPoints}\nYou Win!`;
+    } else if (playerPoints < computerPoints) {
+        return `Player: ${playerPoints}\nComputer: ${computerPoints}\nYou Lose!`;
+    } else {
+        return `Player: ${playerPoints}\nComputer: ${computerPoints}\nIts a draw!`;
+    }
+
+}
 
 function game() {
     let playerPoints = 0;
@@ -74,7 +84,7 @@ function game() {
 
         roundOutcome = playRound(playerSelection, computerSelection);
 
-        winner = getWinner(playerSelection, computerSelection);
+        winner = GetRoundWinner(playerSelection, computerSelection);
         if (winner === 'player') {
             playerPoints++;
         } else if (winner === 'computer') {
@@ -83,6 +93,7 @@ function game() {
 
         console.log(roundOutcome);
     }
+    console.log(getGameWinnerMessage(playerPoints, computerPoints));
 
 
 
