@@ -1,3 +1,6 @@
+let playerPoints = 0;
+let computerPoints = 0;
+
 // return random selection from rock, paper, scissors
 function getComputerChoice() {
     let randInt = Math.floor(Math.random() * 3);
@@ -14,26 +17,8 @@ function getComputerChoice() {
     }
 }
 
-function getPlayerChoice() {
-    let playerChoice;
-
-    while (true){
-        playerChoice = prompt('Rock, Paper, Scissors?');
-        lowerPlayerChoice = playerChoice.toLowerCase();
-
-        if (lowerPlayerChoice === 'rock' || lowerPlayerChoice === 'paper' || lowerPlayerChoice === 'scissors') {
-            return lowerPlayerChoice;
-        }
-
-        alert("That's not an option!");
-    }
-
-
-
-}
-
 // return the winner of a round
-function GetRoundWinner(playerSelection, computerSelection) {
+function getRoundWinner(playerSelection, computerSelection) {
     const optionsArray = ['rock','paper','scissors'];
     let  playerIndex = optionsArray.indexOf(playerSelection.toLowerCase());
     let computerIndex = optionsArray.indexOf(computerSelection.toLowerCase());
@@ -47,9 +32,9 @@ function GetRoundWinner(playerSelection, computerSelection) {
     }
 }
 
-// play a round, and return a message specific to the outcome
-function playRound(playerSelection, computerSelection) {
-    let winner = GetRoundWinner(playerSelection, computerSelection);
+// return a message specific to the outcome of a round
+function getRoundWinnerMessage(playerSelection, computerSelection) {
+    let winner = getRoundWinner(playerSelection, computerSelection);
     
     switch (winner) {
         case 'computer':
@@ -60,6 +45,14 @@ function playRound(playerSelection, computerSelection) {
             return `You win! ${playerSelection} beats ${computerSelection}.`
         default:
             return 'error';
+    }
+}
+
+function addPoint(reciever) {
+    if (reciever === 'computer') {
+        computerPoints++;
+    } else if (reciever === 'player') {
+        playerPoints++;
     }
 }
 
@@ -98,11 +91,26 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
 //     console.log(getGameWinnerMessage(playerPoints, computerPoints));
 // }
 
+
+function resetGame() {
+    playerPoints = 0;
+    computerPoints = 0;
+}
+
 const selectionButtons = document.querySelectorAll(".selection");
+const results = document.querySelector('.results');
 
 // Play a round
 selectionButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        playRound(button.id, getComputerChoice();
+    button.addEventListener('click', () => playRound(button.id));
     })
-})
+
+
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
+    const roundWinner = getRoundWinner(playerSelection, computerSelection);
+
+    addPoint(roundWinner);
+    results.textContent = getRoundWinnerMessage(playerSelection, computerSelection);
+}
+
