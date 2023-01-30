@@ -76,26 +76,33 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
 }
 
 // Play a five round match of rock paper scissors
-function game() {
-    let playerPoints = 0;
-    let computerPoints = 0;
+// function game() {
+//     let playerPoints = 0;
+//     let computerPoints = 0;
 
-    for (let i = 0; i < 5; i++) {
-        playerSelection = getPlayerChoice();
-        computerSelection = getComputerChoice();
+//     for (let i = 0; i < 5; i++) {
+//         playerSelection = getPlayerChoice();
+//         computerSelection = getComputerChoice();
 
-        roundOutcome = playRound(playerSelection, computerSelection);
+//         roundOutcome = playRound(playerSelection, computerSelection);
 
-        winner = GetRoundWinner(playerSelection, computerSelection);
-        if (winner === 'player') {
-            playerPoints++;
-        } else if (winner === 'computer') {
-            computerPoints++;
-        }
+//         winner = GetRoundWinner(playerSelection, computerSelection);
+//         if (winner === 'player') {
+//             playerPoints++;
+//         } else if (winner === 'computer') {
+//             computerPoints++;
+//         }
 
-        console.log(roundOutcome);
-    }
-    console.log(getGameWinnerMessage(playerPoints, computerPoints));
-}
+//         console.log(roundOutcome);
+//     }
+//     console.log(getGameWinnerMessage(playerPoints, computerPoints));
+// }
 
-game();
+const selectionButtons = document.querySelectorAll(".selection");
+
+// Play a round
+selectionButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playRound(button.id, getComputerChoice();
+    })
+})
