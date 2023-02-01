@@ -71,31 +71,7 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
     } else {
         return `Player: ${playerPoints}\nComputer: ${computerPoints}\nIts a draw!`;
     }
-
 }
-
-// Play a five round match of rock paper scissors
-// function game() {
-//     let playerPoints = 0;
-//     let computerPoints = 0;
-
-//     for (let i = 0; i < 5; i++) {
-//         playerSelection = getPlayerChoice();
-//         computerSelection = getComputerChoice();
-
-//         roundOutcome = playGame(playerSelection, computerSelection);
-
-//         winner = GetRoundWinner(playerSelection, computerSelection);
-//         if (winner === 'player') {
-//             playerPoints++;
-//         } else if (winner === 'computer') {
-//             computerPoints++;
-//         }
-
-//         console.log(roundOutcome);
-//     }
-//     console.log(getGameWinnerMessage(playerPoints, computerPoints));
-// }
 
 function playGame(playerSelection) {
     const computerSelection = getComputerChoice();
@@ -108,17 +84,36 @@ function playGame(playerSelection) {
 }
 
 function endGame() {
-    results.textContent = getGameWinnerMessage(playerPoints, computerPoints);
+    gameEndText.textContent = getGameWinnerMessage(playerPoints, computerPoints);
+    selectionButtons.forEach((button) => {
+        button.disabled = true;
+    })
 
+    gameEndDiv.classList.toggle('is-hidden');
+    gameEndDiv.classList.toggle('flex-center-column');
+}
+
+function resetGame() {
+    updatePoints('reset');
+    selectionButtons.forEach((button) => {
+        button.disabled = false;
+    })
+    gameEndDiv.classList.toggle('is-hidden');
+    gameEndDiv.classList.toggle('flex-center-column');
 }
 
 const selectionButtons = document.querySelectorAll(".selection");
 const results = document.querySelector('.results');
 const playerScore = document.querySelector('.player-score');
 const computerScore = document.querySelector('.computer-score');
+const gameEndText = document.querySelector('.gameend-text');
+const gameEndDiv = document.querySelector('.gameend-div');
+const resetButton = document.querySelector('.reset')
 
 // Play a round
 selectionButtons.forEach((button) => {
     button.addEventListener('click', () => playGame(button.id));
     })
 
+
+resetButton.addEventListener('click', () => resetGame());

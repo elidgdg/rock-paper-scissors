@@ -6,20 +6,26 @@
         <title>JavaScript Rock, Paper Scissors</title>
     </head>
     <body>
-        <div class="title-div">
-            <h1 class="title">Rock Paper Scissors</h1>
-        </div>
-        <div class="gameplay-div">
-            <div class="player-score">You: 0</div>
-            <div class="computer-score">Computer: 0</div>
-            <button class="selection" id="rock" type="button">Rock</button>
-            <button class="selection paper" id="paper" type="button">Paper</button>
-            <button class="selection scissors" id="scissors" type="button">Scissors</button>
-            <div class="results"></div>
-        </div>
-        <div class="gameend-div hidden">
-            <h2 class="gameend-text">END OF GAME TEXT HERE</h2>
-            <button class="reset">RESET</button>
+        <div class="container flex-center-column">
+            <div class="title-div">
+                <h1 class="title">Rock Paper Scissors</h1>
+            </div>
+            <div class="gameplay-div flex-center-column">
+                <div class="scores-div flex-center-column">
+                    <div class="player-score">You: 0</div>
+                    <div class="computer-score">Computer: 0</div>
+                </div>
+                <div class="selectionbuttons-div">
+                    <button class="selection" id="rock" type="button">Rock</button>
+                    <button class="selection paper" id="paper" type="button">Paper</button>
+                    <button class="selection scissors" id="scissors" type="button">Scissors</button>
+                </div>
+                <div class="results"></div>
+            </div>
+            <div class="gameend-div is-hidden">
+                <h2 class="gameend-text">END OF GAME TEXT HERE</h2>
+                <button class="reset">RESET</button>
+            </div>
         </div>
         
         <script src="scripts.js" defer></script>
