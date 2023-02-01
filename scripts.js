@@ -83,7 +83,7 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
 //         playerSelection = getPlayerChoice();
 //         computerSelection = getComputerChoice();
 
-//         roundOutcome = playRound(playerSelection, computerSelection);
+//         roundOutcome = playGame(playerSelection, computerSelection);
 
 //         winner = GetRoundWinner(playerSelection, computerSelection);
 //         if (winner === 'player') {
@@ -97,19 +97,19 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
 //     console.log(getGameWinnerMessage(playerPoints, computerPoints));
 // }
 
-function playRound(playerSelection) {
+function playGame(playerSelection) {
     const computerSelection = getComputerChoice();
     const roundWinner = getRoundWinner(playerSelection, computerSelection);
 
     updatePoints(roundWinner);
     results.textContent = getRoundWinnerMessage(playerSelection, computerSelection);
 
-    if (playerPoints === 5 || computerPoints === 5) {endRound()};
+    if (playerPoints === 5 || computerPoints === 5) {endGame()};
 }
 
-function endRound() {
+function endGame() {
     results.textContent = getGameWinnerMessage(playerPoints, computerPoints);
-    updatePoints('reset');
+
 }
 
 const selectionButtons = document.querySelectorAll(".selection");
@@ -119,5 +119,6 @@ const computerScore = document.querySelector('.computer-score');
 
 // Play a round
 selectionButtons.forEach((button) => {
-    button.addEventListener('click', () => playRound(button.id));
+    button.addEventListener('click', () => playGame(button.id));
     })
+
