@@ -48,20 +48,26 @@ function getRoundWinnerMessage(playerSelection, computerSelection) {
     }
 }
 
-function addPoint(reciever) {
+function updatePoints(reciever) {
     if (reciever === 'computer') {
         computerPoints++;
     } else if (reciever === 'player') {
         playerPoints++;
+    } else if (reciever === 'reset') {
+        computerPoints = 0;
+        playerPoints = 0;
     }
+
+    playerScore.textContent = `You: ${playerPoints}`;
+    computerScore.textContent = `Computer: ${computerPoints}`;
 }
 
 // Return a message, declaring the overall winner of the game, or if its a draw
 function getGameWinnerMessage(playerPoints, computerPoints) {
     if (playerPoints > computerPoints){
-        return `Player: ${playerPoints}\nComputer: ${computerPoints}\nYou Win!`;
+        return 'You Win!';
     } else if (playerPoints < computerPoints) {
-        return `Player: ${playerPoints}\nComputer: ${computerPoints}\nYou Lose!`;
+        return 'You Lose!';
     } else {
         return `Player: ${playerPoints}\nComputer: ${computerPoints}\nIts a draw!`;
     }
@@ -91,26 +97,27 @@ function getGameWinnerMessage(playerPoints, computerPoints) {
 //     console.log(getGameWinnerMessage(playerPoints, computerPoints));
 // }
 
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
+    const roundWinner = getRoundWinner(playerSelection, computerSelection);
 
-function resetGame() {
-    playerPoints = 0;
-    computerPoints = 0;
+    updatePoints(roundWinner);
+    results.textContent = getRoundWinnerMessage(playerSelection, computerSelection);
+
+    if (playerPoints === 5 || computerPoints === 5) {endRound()};
+}
+
+function endRound() {
+    results.textContent = getGameWinnerMessage(playerPoints, computerPoints);
+    updatePoints('reset');
 }
 
 const selectionButtons = document.querySelectorAll(".selection");
 const results = document.querySelector('.results');
+const playerScore = document.querySelector('.player-score');
+const computerScore = document.querySelector('.computer-score');
 
 // Play a round
 selectionButtons.forEach((button) => {
     button.addEventListener('click', () => playRound(button.id));
     })
-
-
-function playRound(playerSelection) {
-    const computerSelection = getComputerChoice();
-    const roundWinner = getRoundWinner(playerSelection, computerSelection);
-
-    addPoint(roundWinner);
-    results.textContent = getRoundWinnerMessage(playerSelection, computerSelection);
-}
-
