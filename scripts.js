@@ -87,6 +87,7 @@ function endGame() {
     gameEndText.textContent = getGameWinnerMessage(playerPoints, computerPoints);
     selectionButtons.forEach((button) => {
         button.disabled = true;
+        button.classList.toggle('hover-zoom');
     })
 
     gameEndDiv.classList.toggle('is-hidden');
@@ -97,6 +98,7 @@ function resetGame() {
     updatePoints('reset');
     selectionButtons.forEach((button) => {
         button.disabled = false;
+        button.classList.toggle('hover-zoom');
     })
     gameEndDiv.classList.toggle('is-hidden');
     gameEndDiv.classList.toggle('flex-center-column');
@@ -108,7 +110,7 @@ const playerScore = document.querySelector('.player-score');
 const computerScore = document.querySelector('.computer-score');
 const gameEndText = document.querySelector('.gameend-text');
 const gameEndDiv = document.querySelector('.gameend-div');
-const resetButton = document.querySelector('.reset')
+const resetButton = document.querySelector('.play-again')
 
 // Play a round
 selectionButtons.forEach((button) => {
