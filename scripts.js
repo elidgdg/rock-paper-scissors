@@ -102,7 +102,7 @@ function resetGame() {
     gameEndDiv.classList.toggle('flex-center-column');
 }
 
-const selectionButtons = document.querySelectorAll(".selection");
+const selectionButtons = document.querySelectorAll(".selection-button");
 const results = document.querySelector('.results');
 const playerScore = document.querySelector('.player-score');
 const computerScore = document.querySelector('.computer-score');
